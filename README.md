@@ -1,4 +1,1 @@
-# tics-taxiapp
-# tics-taxiapp
-# tics-taxiapp
-# tics-taxiapp
+# Proyecto para la materia de TICS - PUCETEC
