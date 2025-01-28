@@ -4,94 +4,98 @@ let reservations = [];
 let currentUser = null;
 
 function toggleForms() {
-    document.getElementById('loginForm').classList.toggle('hidden');
-    document.getElementById('signupForm').classList.toggle('hidden');
+  document.getElementById("loginForm").classList.toggle("hidden");
+  document.getElementById("signupForm").classList.toggle("hidden");
 }
 
 function login(event) {
-    event.preventDefault();
-    const email = event.target[0].value;
-    const password = event.target[1].value;
+  event.preventDefault();
+  const email = event.target[0].value;
+  const password = event.target[1].value;
 
-    const user = users.find(u => u.email === email && u.password === password);
-    if (user) {
-        currentUser = user;
-        showDashboard();
-    } else {
-        alert('Correo o contraseña incorrectos');
-    }
+  const user = users.find((u) => u.email === email && u.password === password);
+  if (user) {
+    currentUser = user;
+    showDashboard();
+  } else {
+    alert("Correo o contraseña incorrectos");
+  }
 }
 
 function signup(event) {
-    event.preventDefault();
-    const name = event.target[0].value;
-    const email = event.target[1].value;
-    const password = event.target[2].value;
-    const confirmPassword = event.target[3].value;
+  event.preventDefault();
+  const name = event.target[0].value;
+  const email = event.target[1].value;
+  const password = event.target[2].value;
+  const confirmPassword = event.target[3].value;
 
-    if (password !== confirmPassword) {
-        alert('Las contraseñas no coinciden');
-        return false;
-    }
-
-    if (users.some(u => u.email === email)) {
-        alert('El correo ya está registrado');
-        return false;
-    }
-
-    users.push({ name, email, password });
-    alert('Registro exitoso');
-    toggleForms();
+  if (password !== confirmPassword) {
+    alert("Las contraseñas no coinciden");
     return false;
+  }
+
+  if (users.some((u) => u.email === email)) {
+    alert("El correo ya está registrado");
+    return false;
+  }
+
+  users.push({ name, email, password });
+  alert("Registro exitoso");
+  toggleForms();
+  return false;
 }
 
 function showDashboard() {
-    document.getElementById('loginForm').classList.add('hidden');
-    document.getElementById('signupForm').classList.add('hidden');
-    document.getElementById('dashboard').classList.remove('hidden');
-    updateReservationsList();
+  document.getElementById("loginForm").classList.add("hidden");
+  document.getElementById("signupForm").classList.add("hidden");
+  document.getElementById("dashboard").classList.remove("hidden");
+  updateReservationsList();
 }
 
 function logout() {
-    currentUser = null;
-    document.getElementById('dashboard').classList.add('hidden');
-    document.getElementById('loginForm').classList.remove('hidden');
+  currentUser = null;
+  document.getElementById("dashboard").classList.add("hidden");
+  document.getElementById("loginForm").classList.remove("hidden");
 }
 
 function bookTaxi(event) {
-    event.preventDefault();
-    const formData = new FormData(event.target);
-    const reservation = {
-        id: Date.now(),
-        user: currentUser.email,
-        phone: formData.get('tel'),
-        date: formData.get('date'),
-        time: formData.get('time'),
-        passengers: formData.get('passengers'),
-        vehicleType: formData.get('vehicleType'),
-        pickup: formData.get('pickup'),
-        destination: formData.get('destination'),
-        notes: formData.get('notes'),
-        driver: formData.get('driver')
-    };
+  event.preventDefault();
+  const formData = new FormData(event.target);
+  const reservation = {
+    id: Date.now(),
+    user: currentUser.email,
+    phone: formData.get("tel"),
+    date: formData.get("date"),
+    time: formData.get("time"),
+    passengers: formData.get("passengers"),
+    vehicleType: formData.get("vehicleType"),
+    pickup: formData.get("pickup"),
+    destination: formData.get("destination"),
+    notes: formData.get("notes"),
+    driver: formData.get("driver"),
+  };
 
-    reservations.push(reservation);
-    event.target.reset();
-    updateReservationsList();
-    alert('Reserva confirmada');
-    return false;
+  reservations.push(reservation);
+  event.target.reset();
+  updateReservationsList();
+  alert("Reserva confirmada");
+  return false;
 }
 
 function deleteReservation(id) {
-    reservations = reservations.filter(r => r.id !== id);
-    updateReservationsList();
+  reservations = reservations.filter((r) => r.id !== id);
+  updateReservationsList();
 }
 
 function updateReservationsList() {
-    const reservationsList = document.getElementById('reservationsList');
-    const userReservations = reservations.filter(r => r.user === currentUser.email);
-    
-    reservationsList.innerHTML = userReservations.map(r => `
+  const reservationsList = document.getElementById("reservationsList");
+  const userReservations = reservations.filter(
+    (r) => r.user === currentUser.email
+  );
+
+  reservationsList.innerHTML = userReservations
+    .map(
+      (r) => `
         <div class="reservation-card">
             <p>📅 Fecha: ${r.date}</p>
             <p>⏰ Hora: ${r.time}</p>
@@ -100,10 +104,15 @@ function updateReservationsList() {
             <p>👥 Pasajeros: ${r.passengers}</p>
             <p>🚗 Vehículo: ${r.vehicleType}</p>
             <p>📞 Teléfono: ${r.phone}</p>
-            ${r.notes ? `<p>📝 Notas: ${r.notes}</p>` : ''}
-            <button onclick="deleteReservation(${r.id})" class="delete-reservation">
+            ${r.notes ? `<p>📝 Notas: ${r.notes}</p>` : ""}
+            <button onclick="deleteReservation(${
+              r.id
+            })" class="delete-reservation">
                 Cancelar Reserva ❌
             </button>
         </div>
-    `).join('');
+    `
+    )
+    .join("");
 }
+

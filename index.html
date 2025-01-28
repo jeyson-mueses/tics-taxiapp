@@ -1,138 +1,175 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>TaxiYa - Inicio de Sesión</title>
-    <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-</head>
-<body>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.7.13/lottie.min.js"></script>
+  </head>
+  <body>
     <div class="auth-container" id="loginForm">
-        <div class="auth-box">
-            <img src="https://img.freepik.com/free-vector/taxi-car-service-logo_23-2148484574.jpg" alt="Taxi" class="taxi-logo">
-            <h1>Bienvenido a TaxiYa</h1>
-            <form onsubmit="return login(event)">
-                <input type="email" placeholder="Correo Electrónico" required>
-                <input type="password" placeholder="Contraseña" required>
-                <button type="submit" class="btn-primary">Iniciar Sesión</button>
-            </form>
-            <p>¿No tienes cuenta? <a href="#" onclick="toggleForms()">Regístrate aquí</a></p>
-        </div>
+      <div class="auth-box">
+        <img src="./media/logo.png" alt="Taxi" class="taxi-logo" />
+        <h1>Bienvenido a TaxiYa</h1>
+        <form onsubmit="return login(event)">
+          <input type="email" placeholder="Correo Electrónico" required />
+          <input type="password" placeholder="Contraseña" required />
+          <button type="submit" class="btn-primary">Iniciar Sesión</button>
+        </form>
+        <p class="p">
+          ¿No tienes cuenta?
+          <a href="#" onclick="toggleForms()">Regístrate aquí</a>
+        </p>
+      </div>
     </div>
 
     <div class="auth-container hidden" id="signupForm">
-        <div class="auth-box">
-            <img src="https://img.freepik.com/free-vector/taxi-car-service-logo_23-2148484574.jpg" alt="Taxi" class="taxi-logo">
-            <h1>Registro</h1>
-            <form onsubmit="return signup(event)">
-                <input type="text" placeholder="Nombre Completo" required>
-                <input type="email" placeholder="Correo Electrónico" required>
-                <input type="password" placeholder="Contraseña" required>
-                <input type="password" placeholder="Confirmar Contraseña" required>
-                <button type="submit" class="btn-primary">Registrarse</button>
-            </form>
-            <p>¿Ya tienes cuenta? <a href="#" onclick="toggleForms()">Inicia sesión aquí</a></p>
-        </div>
+      <div class="auth-box">
+        <img src="./media/logo.png" alt="Taxi" class="taxi-logo" />
+        <h1>Registro</h1>
+        <form onsubmit="return signup(event)">
+          <input type="text" placeholder="Nombre Completo" required />
+          <input type="email" placeholder="Correo Electrónico" required />
+          <input type="password" placeholder="Contraseña" required />
+          <input type="password" placeholder="Confirmar Contraseña" required />
+          <button type="submit" class="btn-primary">Registrarse</button>
+        </form>
+        <p class="p">
+          ¿Ya tienes cuenta?
+          <a href="#" onclick="toggleForms()">Inicia sesión aquí</a>
+        </p>
+      </div>
     </div>
 
     <div class="dashboard hidden" id="dashboard">
-        <nav>
-            <h2>🚕 TaxiYa Dashboard</h2>
-            <button onclick="logout()" class="btn-logout">
-                Cerrar Sesión 
-                <span>🚪</span>
-            </button>
-        </nav>
-        
-        <div class="dashboard-content">
-            <div class="booking-form">
-                <h3>✨ Nueva Reserva</h3>
-                <form onsubmit="return bookTaxi(event)">
-                    <div class="form-group">
-                        <label>📞 Teléfono</label>
-                        <input type="tel" name="tel" required pattern="[0-9]{9}" placeholder="Ingrese su número de teléfono">
-                    </div>
-                    
-                    <div class="form-group">
-                        <label>📅 Fecha</label>
-                        <input type="date" name="date" required>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label>⏰ Hora</label>
-                        <input type="time" name="time" required>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label>👥 Pasajeros</label>
-                        <select name="passengers" required>
-                            <option value="1">1 Pasajero</option>
-                            <option value="2">2 Pasajeros</option>
-                            <option value="3">3 Pasajeros</option>
-                            <option value="4">4 Pasajeros</option>
-                        </select>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label>🚗 Tipo de Vehículo</label>
-                        <select name="vehicleType" required>
-                            <option value="estandar">Estándar</option>
-                            <option value="ejecutivo">Ejecutivo</option>
-                            <option value="van">Van</option>
-                        </select>
-                    </div>
+      <nav>
+        <h2>🚕 Taxi EC Dashboard</h2>
+        <button onclick="logout()" class="btn-logout">
+          Cerrar Sesión
+          <span>🚪</span>
+        </button>
+      </nav>
 
-                    <div class="form-group">
-                        <label>📍 Dirección de Recogida</label>
-                        <input type="text" name="pickup" required placeholder="¿Dónde te recogemos?">
-                    </div>
-
-                    <div class="form-group">
-                        <label>🎯 Destino</label>
-                        <input type="text" name="destination" required placeholder="¿A dónde vas?">
-                    </div>
-
-                    <div class="form-group">
-                        <label>📝 Notas Adicionales</label>
-                        <textarea name="notes" placeholder="Instrucciones especiales, referencias, etc."></textarea>
-                    </div>
-
-                    <div class="form-group">
-                        <label>🚖 Seleccionar Conductor</label>
-                        <div class="drivers-grid">
-                            <label class="driver-card">
-                                <input type="radio" name="driver" value="carlos" required>
-                                <img src="https://randomuser.me/api/portraits/men/1.jpg" alt="Conductor">
-                                <p>Carlos Rodríguez</p>
-                                <span class="rating">⭐ 4.9</span>
-                            </label>
-                            <label class="driver-card">
-                                <input type="radio" name="driver" value="juan">
-                                <img src="https://randomuser.me/api/portraits/men/2.jpg" alt="Conductor">
-                                <p>Juan Pérez</p>
-                                <span class="rating">⭐ 4.8</span>
-                            </label>
-                            <label class="driver-card">
-                                <input type="radio" name="driver" value="maria">
-                                <img src="https://randomuser.me/api/portraits/women/1.jpg" alt="Conductora">
-                                <p>María García</p>
-                                <span class="rating">⭐ 4.9</span>
-                            </label>
-                        </div>
-                    </div>
-
-                    <button type="submit" class="btn-primary">Reservar Taxi ✨</button>
-                </form>
+      <div class="dashboard-content">
+        <div class="booking-form">
+          <h3>✨ Nueva Reserva</h3>
+          <form onsubmit="return bookTaxi(event)">
+            <div class="form-group">
+              <label>📞 Teléfono</label>
+              <input
+                type="tel"
+                name="tel"
+                required
+                placeholder="Ingrese su número de teléfono"
+              />
             </div>
 
-            <div class="reservations">
-                <h3>📋 Mis Reservas</h3>
-                <div id="reservationsList"></div>
+            <div class="form-group">
+              <label>📅 Fecha</label>
+              <input type="date" name="date" required />
             </div>
+
+            <div class="form-group">
+              <label>⏰ Hora</label>
+              <input type="time" name="time" required />
+            </div>
+
+            <div class="form-group">
+              <label>👥 Pasajeros</label>
+              <select name="passengers" required>
+                <option value="1">1 Pasajero</option>
+                <option value="2">2 Pasajeros</option>
+                <option value="3">3 Pasajeros</option>
+                <option value="4">4 Pasajeros</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label>🚗 Tipo de Vehículo</label>
+              <select name="vehicleType" required>
+                <option value="estandar">Estándar</option>
+                <option value="ejecutivo">Ejecutivo</option>
+                <option value="van">Van</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label>📍 Dirección de Recogida</label>
+              <input
+                type="text"
+                name="pickup"
+                required
+                placeholder="¿Dónde te recogemos?"
+              />
+            </div>
+
+            <div class="form-group">
+              <label>🎯 Destino</label>
+              <input
+                type="text"
+                name="destination"
+                required
+                placeholder="¿A dónde vas?"
+              />
+            </div>
+
+            <div class="form-group">
+              <label>📝 Notas Adicionales</label>
+              <textarea
+                name="notes"
+                placeholder="Instrucciones especiales, referencias, etc."
+              ></textarea>
+            </div>
+
+            <div class="form-group">
+              <label>🚖 Seleccionar Conductor</label>
+              <div class="drivers-grid">
+                <label class="driver-card">
+                  <input type="radio" name="driver" value="carlos" required />
+                  <img
+                    src="https://randomuser.me/api/portraits/men/1.jpg"
+                    alt="Conductor"
+                  />
+                  <p>Carlos Rodríguez</p>
+                  <span class="rating">⭐ 4.9</span>
+                </label>
+                <label class="driver-card">
+                  <input type="radio" name="driver" value="juan" />
+                  <img
+                    src="https://randomuser.me/api/portraits/men/2.jpg"
+                    alt="Conductor"
+                  />
+                  <p>Juan Pérez</p>
+                  <span class="rating">⭐ 4.8</span>
+                </label>
+                <label class="driver-card">
+                  <input type="radio" name="driver" value="maria" />
+                  <img
+                    src="https://randomuser.me/api/portraits/women/1.jpg"
+                    alt="Conductora"
+                  />
+                  <p>María García</p>
+                  <span class="rating">⭐ 4.9</span>
+                </label>
+              </div>
+            </div>
+
+            <button type="submit" class="btn-primary">Reservar Taxi ✨</button>
+          </form>
         </div>
+
+        <div class="reservations">
+          <h3>📋 Mis Reservas</h3>
+          <div id="reservationsList"></div>
+        </div>
+      </div>
     </div>
 
     <script src="main.js"></script>
-</body>
+  </body>
 </html>
