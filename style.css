@@ -1,5 +1,5 @@
 :root {
-    --primary: #FFC107;
+    --primary: #ffc107;
     --primary-light: #FFF3D6;
     --primary-dark: #ff7300;
     --secondary: #2C3E50;
@@ -356,7 +356,3 @@ nav h2 {
         padding: 0.8rem;
     }
 }
-
-
-/* background-color: #FAD961;
-background-image: linear-gradient(90deg, #FAD961 0%, #F76B1C 100%); */
