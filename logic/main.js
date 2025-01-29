@@ -79,6 +79,7 @@ function bookTaxi(event) {
   event.target.reset();
   updateReservationsList();
   alert("Reserva confirmada");
+
   return false;
 }
 
@@ -105,14 +106,34 @@ function updateReservationsList() {
             <p>🚗 Vehículo: ${r.vehicleType}</p>
             <p>📞 Teléfono: ${r.phone}</p>
             ${r.notes ? `<p>📝 Notas: ${r.notes}</p>` : ""}
-            <button onclick="deleteReservation(${
-              r.id
-            })" class="delete-reservation">
+            <p><strong>⏳ Tu taxi viene en:</strong> <span id="countdown-${r.id}">Calculando...</span></p>
+            <button onclick="deleteReservation(${r.id})" class="delete-reservation">
                 Cancelar Reserva ❌
             </button>
         </div>
     `
     )
     .join("");
+
+  userReservations.forEach((r) => startCountdown(`countdown-${r.id}`, r.date, r.time));
 }
 
+function startCountdown(elementId, date, time) {
+  const countdownElement = document.getElementById(elementId);
+  const targetTime = new Date(`${date}T${time}`).getTime();
+
+  function updateCountdown() {
+    const now = new Date().getTime();
+    const timeLeft = targetTime - now;
+    if (timeLeft <= 0) {
+      countdownElement.innerText = "¡Tu taxi ha llegado!";
+      return;
+    }
+    const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+    countdownElement.innerText = `${minutes}m ${seconds}s`;
+    setTimeout(updateCountdown, 1000);
+  }
+
+  updateCountdown();
+}
